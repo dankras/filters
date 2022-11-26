@@ -5,6 +5,7 @@ import { useTheme } from "@mui/material/styles";
 
 import { PEOPLE } from "./data/people";
 import { minHeightInches, maxHeightInches } from "./data/stats";
+import { sexPartnerScoreToLabel } from "./data/labels";
 import ResultsDisplay from "./components/resultsDisplay";
 import LargeScreenLayout from "./components/LargeScreenLayout";
 import SmallScreenLayout from "./components/SmallScreenLayout";
@@ -23,10 +24,10 @@ import {
 export default function App() {
   const [isAttractivenessFilterEnabled, setAttractivenessFilterEnabled] =
     useState(true);
-  const [attractivenessRange, setAttractivenessRange] = useState([5, 10]);
+  const [attractivenessRange, setAttractivenessRange] = useState([5, 6]);
 
-  const [isHeightFilterEnabled, setHeightFilterEnabled] = useState(false);
-  const [heightRange, setHeightRange] = useState([65, 70]);
+  const [isHeightFilterEnabled, setHeightFilterEnabled] = useState(true);
+  const [heightRange, setHeightRange] = useState([62, 68]);
 
   const [isIncomeFilterEnabled, setIncomeFilterEnabled] = useState(false);
   const [incomeRange, setIncomeRange] = useState([3, 7]);
@@ -40,6 +41,12 @@ export default function App() {
 
   const [isNicotineFilterEnabled, setNicotineFilterEnabled] = useState(false);
   const [nicotine, setNicotine] = useState("No");
+
+  const [isMarijuanaFilterEnabled, setMarijuanaFilterEnabled] = useState(false);
+  const [marijuana, setMarijuana] = useState("No");
+
+  const [isPsychFilterEnabled, setPsychFilterEnabled] = useState(false);
+  const [psychedelics, setPsychedelics] = useState("No");
 
   const [isPoliticsFilterEnabled, setPoliticsFilterEnabled] = useState(false);
   const [politics, setPolitics] = useState("Moderate");
@@ -55,6 +62,10 @@ export default function App() {
 
   const [isHasKidsFilterEnabled, setHasKidsFilterEnabled] = useState(false);
   const [hasKids, setHasKids] = useState("No");
+
+  const [isSexPartnersFilterEnabled, setSexPartnersFilterEnabled] =
+    useState(false);
+  const [sexPartners, setSexPartners] = useState(1.0);
 
   const leftIncome = formatIncomeBucket(incomeRange[0], true);
   const rightIncome = formatIncomeBucket(incomeRange[1], false);
@@ -174,6 +185,36 @@ export default function App() {
       info: "Do they use nicotine?",
     },
     {
+      label: "Marijuana",
+      type: "dropdown",
+      isEnabled: isMarijuanaFilterEnabled,
+      setEnabled: setMarijuanaFilterEnabled,
+      value: marijuana,
+      setValue: setMarijuana,
+      predicate: (person) => person.uses_marijuana === marijuana,
+      display: marijuana === "Yes" ? "marijuana users" : "not marijuana users",
+      options: [
+        { value: "Yes", label: "Yes" },
+        { value: "No", label: "No" },
+      ],
+      info: "Do they use marijuana?",
+    },
+    {
+      label: "Psychedelics",
+      type: "dropdown",
+      isEnabled: isPsychFilterEnabled,
+      setEnabled: setPsychFilterEnabled,
+      value: psychedelics,
+      setValue: setPsychedelics,
+      predicate: (person) => person.has_used_psychedelics === psychedelics,
+      display: psychedelics === "Yes" ? "psychonauts" : "not psychonauts",
+      options: [
+        { value: "Yes", label: "Yes" },
+        { value: "No", label: "No" },
+      ],
+      info: "Have they ever used psychedelics?",
+    },
+    {
       label: "Politics",
       type: "dropdown",
       isEnabled: isPoliticsFilterEnabled,
@@ -246,6 +287,26 @@ export default function App() {
         { value: "No", label: "No" },
       ],
       info: "Do they want kids?",
+    },
+    {
+      label: "Sexual Partners",
+      type: "dropdown",
+      isEnabled: isSexPartnersFilterEnabled,
+      setEnabled: setSexPartnersFilterEnabled,
+      value: sexPartners,
+      setValue: setSexPartners,
+      predicate: (person) => person.sex_partners_score === sexPartners,
+      display: `having sex with ${sexPartnerScoreToLabel(
+        sexPartners
+      )} partners per year`,
+      options: [
+        { value: 0.0, label: "0" },
+        { value: 1.0, label: "1" },
+        { value: 2.0, label: "2-4" },
+        { value: 3.0, label: "5-9" },
+        { value: 4.0, label: "10+" },
+      ],
+      info: "How many different partners have they had sex with in the past year?",
     },
   ];
 

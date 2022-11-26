@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { replace } from "lodash";
 
 import { INCOME_BUCKET_TO_LABEL } from "./data/labels";

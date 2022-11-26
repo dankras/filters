@@ -10,13 +10,8 @@ export const INCOME_BUCKET_TO_LABEL = {
   9: [">$200k", ">$200k"],
 };
 
-export const SEX_PARTNER_SCORE_TO_LABEL = {
-  0: ["0", "0"],
-  1: ["1", "1"],
-  2: ["2", "4"],
-  3: ["5", "9"],
-  4: ["10+", "10+"],
-};
+export const sexPartnerScoreToLabel = (score) =>
+  ({ 0: "0", 1: "1", 2: "2-4", 3: "5-9", 4: "10+" }[score]);
 
 export const NUM_CHILDREN_WANTED_TO_LABEL = {
   0: ["0", "0"],
