@@ -48,7 +48,7 @@ const ResultsDisplay = ({
             onClick={toggleDenominators}
             sx={{
               textDecoration: "underline",
-              textDecorationColor: "gray",
+              textDecorationColor: "#EF6F6F",
               textDecorationStyle: "dotted",
               textUnderlineOffset: "10px",
               cursor: "pointer",

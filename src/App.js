@@ -24,7 +24,7 @@ import {
 export default function App() {
   const [isAttractivenessFilterEnabled, setAttractivenessFilterEnabled] =
     useState(true);
-  const [attractivenessRange, setAttractivenessRange] = useState([5, 6]);
+  const [attractivenessRange, setAttractivenessRange] = useState([4, 6]);
 
   const [isHeightFilterEnabled, setHeightFilterEnabled] = useState(true);
   const [heightRange, setHeightRange] = useState([62, 68]);
