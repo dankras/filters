@@ -1,5 +1,7 @@
 import { Tooltip, Typography, Switch, Grid, Box, Slider } from "@mui/material";
 
+import TooltipLabel from "./tooltipLabel";
+
 const RangeSlider = ({
   label,
   range,
@@ -14,6 +16,7 @@ const RangeSlider = ({
   info,
   mb = 0,
   width = 300,
+  dialogTooltips = false,
 }) => {
   const leftBound = formatLeftBound ? formatLeftBound(range[0]) : range[0];
   const rightBound = formatRightBound ? formatRightBound(range[1]) : range[1];
@@ -23,23 +26,30 @@ const RangeSlider = ({
     <Box sx={{ width, mb }}>
       <Grid container justifyContent="space-between">
         <Grid item>
-          <Typography mb={2} variant="h6">
-            <Tooltip title={info}>
-              <Box
-                sx={{
-                  fontWeight: "bold",
-                  display: "inline",
-                  textDecoration: "underline",
-                  textDecorationStyle: "dotted",
-                  textUnderlineOffset: "5px",
-                  cursor: "pointer",
-                }}
-              >
-                {label}
-              </Box>
-            </Tooltip>
-            {isEnabled && `: ${detail}`}
-          </Typography>
+          <TooltipLabel
+            label={label}
+            detail={info}
+            shouldOpenDialog={dialogTooltips}
+            contents={
+              <Typography mb={2} variant="h6">
+                <Tooltip title={info}>
+                  <Box
+                    sx={{
+                      fontWeight: "bold",
+                      display: "inline",
+                      textDecoration: "underline",
+                      textDecorationStyle: "dotted",
+                      textUnderlineOffset: "5px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {label}
+                  </Box>
+                </Tooltip>
+                {isEnabled && `: ${detail}`}
+              </Typography>
+            }
+          />
         </Grid>
         <Grid item>
           <Switch

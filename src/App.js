@@ -17,8 +17,6 @@ import {
 } from "./utils";
 
 // TODOs
-// - UI
-//   - [ ] mobile
 // - keep state in URL (for sharing)
 // - add Big 5 Personality Traits
 
@@ -313,6 +311,7 @@ export default function App() {
       toggleDenominators={() => setDenominatorOpen(!areDenominatorsOpen)}
       margin={margin}
       width={width}
+      buttonOrientation={isLargeScreen ? "row" : "column"}
     />
   );
 

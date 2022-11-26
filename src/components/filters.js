@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import RangeSlider from "./rangeSlider";
 import Dropdown from "./dropdown";
 
-const Filters = ({ filters, width }) => (
+const Filters = ({ filters, width, dialogTooltips = false }) => (
   <Box>
     {filters.map((filter) => {
       switch (filter.type) {
@@ -24,6 +24,7 @@ const Filters = ({ filters, width }) => (
               info={filter.info}
               mb={4}
               width={width}
+              dialogTooltips={dialogTooltips}
             />
           );
         case "dropdown":
@@ -39,6 +40,7 @@ const Filters = ({ filters, width }) => (
               info={filter.info}
               mb={4}
               width={width}
+              dialogTooltips={dialogTooltips}
             />
           );
         default:

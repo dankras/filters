@@ -15,7 +15,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
 const Puller = styled(Box)(({ theme }) => ({
   width: 30,
   height: 6,
-  backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[900],
+  backgroundColor: theme.palette.mode === "light" ? grey[500] : grey[900],
   borderRadius: 3,
   position: "absolute",
   top: 8,
@@ -73,7 +73,7 @@ function SmallScreenLayout({
         >
           <Puller />
           <Typography variant="h6" sx={{ p: 2, textAlign: "center" }}>
-            <Box sx={{ fontWeight: "bold" }}>Filter Settings</Box>
+            <Box sx={{ fontWeight: "bold" }}>Filters</Box>
           </Typography>
         </StyledBox>
         <StyledBox
@@ -91,7 +91,7 @@ function SmallScreenLayout({
               overflow: "auto",
             }}
           >
-            <Filters filters={filtersConfig} width={350} />
+            <Filters filters={filtersConfig} width={350} dialogTooltips />
           </Box>
         </StyledBox>
       </SwipeableDrawer>

@@ -8,6 +8,8 @@ import {
   Box,
 } from "@mui/material";
 
+import TooltipLabel from "./tooltipLabel";
+
 const Dropdown = ({
   label,
   value,
@@ -18,24 +20,32 @@ const Dropdown = ({
   info,
   mb = 0,
   width = 300,
+  dialogTooltips = false,
 }) => (
   <Box sx={{ width, mb }}>
     <Grid container justifyContent="space-between">
       <Grid item>
-        <Tooltip title={info}>
-          <Typography
-            mb={2}
-            variant="h6"
-            sx={{
-              textDecoration: "underline",
-              textDecorationStyle: "dotted",
-              textUnderlineOffset: "5px",
-              cursor: "pointer",
-            }}
-          >
-            <Box sx={{ fontWeight: "bold" }}>{label}</Box>
-          </Typography>
-        </Tooltip>
+        <TooltipLabel
+          label={label}
+          detail={info}
+          shouldOpenDialog={dialogTooltips}
+          contents={
+            <Tooltip title={info}>
+              <Typography
+                mb={2}
+                variant="h6"
+                sx={{
+                  textDecoration: "underline",
+                  textDecorationStyle: "dotted",
+                  textUnderlineOffset: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                <Box sx={{ fontWeight: "bold" }}>{label}</Box>
+              </Typography>
+            </Tooltip>
+          }
+        />
       </Grid>
       <Grid item>
         <Switch
