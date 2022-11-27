@@ -32,6 +32,10 @@ export default function App() {
     useState(false);
   const [intelligenceRange, setIntelligenceRange] = useState([0.3, 0.7]);
 
+  const [isSexPartnersFilterEnabled, setSexPartnersFilterEnabled] =
+    useState(false);
+  const [sexPartners, setSexPartners] = useState(0.0);
+
   const [isAlcoholFilterEnabled, setAlcoholFilterEnabled] = useState(false);
   const [alcohol, setAlcohol] = useState("No");
 
@@ -62,10 +66,6 @@ export default function App() {
 
   const [isHasKidsFilterEnabled, setHasKidsFilterEnabled] = useState(false);
   const [hasKids, setHasKids] = useState("No");
-
-  const [isSexPartnersFilterEnabled, setSexPartnersFilterEnabled] =
-    useState(false);
-  const [sexPartners, setSexPartners] = useState(1.0);
 
   const leftIncome = formatIncomeBucket(incomeRange[0], true);
   const rightIncome = formatIncomeBucket(incomeRange[1], false);
@@ -135,6 +135,26 @@ export default function App() {
       formatLeftBound: (value) => formatFloatToPercent(value),
       formatRightBound: (value) => formatFloatToPercent(value),
       info: "IQ represented as a percentile",
+    },
+    {
+      label: "Sexual Partners",
+      type: "dropdown",
+      isEnabled: isSexPartnersFilterEnabled,
+      setEnabled: setSexPartnersFilterEnabled,
+      value: sexPartners,
+      setValue: setSexPartners,
+      predicate: (person) => person.sex_partners_score === sexPartners,
+      display: `having sex with ${sexPartnerScoreToLabel(
+        sexPartners
+      )} partners per year`,
+      options: [
+        { value: 0.0, label: "0" },
+        { value: 1.0, label: "1" },
+        { value: 2.0, label: "2-4" },
+        { value: 3.0, label: "5-9" },
+        { value: 4.0, label: "10+" },
+      ],
+      info: "How many different partners have they had sex with in the past year?",
     },
     {
       label: "Alcohol",
@@ -287,26 +307,6 @@ export default function App() {
         { value: "No", label: "No" },
       ],
       info: "Do they want kids?",
-    },
-    {
-      label: "Sexual Partners",
-      type: "dropdown",
-      isEnabled: isSexPartnersFilterEnabled,
-      setEnabled: setSexPartnersFilterEnabled,
-      value: sexPartners,
-      setValue: setSexPartners,
-      predicate: (person) => person.sex_partners_score === sexPartners,
-      display: `having sex with ${sexPartnerScoreToLabel(
-        sexPartners
-      )} partners per year`,
-      options: [
-        { value: 0.0, label: "0" },
-        { value: 1.0, label: "1" },
-        { value: 2.0, label: "2-4" },
-        { value: 3.0, label: "5-9" },
-        { value: 4.0, label: "10+" },
-      ],
-      info: "How many different partners have they had sex with in the past year?",
     },
   ];
 
