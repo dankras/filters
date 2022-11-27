@@ -22,10 +22,6 @@ import {
 // - add Big 5 Personality Traits
 
 export default function App() {
-  const [isAttractivenessFilterEnabled, setAttractivenessFilterEnabled] =
-    useState(true);
-  const [attractivenessRange, setAttractivenessRange] = useState([4, 6]);
-
   const [isHeightFilterEnabled, setHeightFilterEnabled] = useState(true);
   const [heightRange, setHeightRange] = useState([62, 68]);
 
@@ -51,6 +47,10 @@ export default function App() {
   const [isPoliticsFilterEnabled, setPoliticsFilterEnabled] = useState(false);
   const [politics, setPolitics] = useState("Moderate");
 
+  const [isAttractivenessFilterEnabled, setAttractivenessFilterEnabled] =
+    useState(false);
+  const [attractivenessRange, setAttractivenessRange] = useState([4, 6]);
+
   const [
     isPoliticalToleranceFilterEnabled,
     setPoliticalToleranceFilterEnabled,
@@ -71,24 +71,6 @@ export default function App() {
   const rightIncome = formatIncomeBucket(incomeRange[1], false);
 
   const filtersConfig = [
-    {
-      label: "Attractiveness",
-      type: "range",
-      isEnabled: isAttractivenessFilterEnabled,
-      setEnabled: setAttractivenessFilterEnabled,
-      range: attractivenessRange,
-      setRange: setAttractivenessRange,
-      predicate: (person) =>
-        person.avg_physical_attractiveness_rating >= attractivenessRange[0] &&
-        person.avg_physical_attractiveness_rating <= attractivenessRange[1],
-      display:
-        attractivenessRange[0] === attractivenessRange[1]
-          ? attractivenessRange[0] + " (out of 10) in physical attractiveness"
-          : `${attractivenessRange[0]} - ${attractivenessRange[1]} (out of 10) in physical attractiveness`,
-      min: 1,
-      max: 10,
-      info: "Rating of physical attractiveness by the opposite sex on a 1 - 10 scale, with 1 being least attractive, 5 being average, and 10 being most attractive. Based on average of 10 ratings of person's photo.",
-    },
     {
       label: "Height",
       type: "range",
@@ -254,6 +236,24 @@ export default function App() {
         { value: "No", label: "No" },
       ],
       info: "Are they comfortable being friends with someone that disagrees with them on important political topics?",
+    },
+    {
+      label: "Attractiveness",
+      type: "range",
+      isEnabled: isAttractivenessFilterEnabled,
+      setEnabled: setAttractivenessFilterEnabled,
+      range: attractivenessRange,
+      setRange: setAttractivenessRange,
+      predicate: (person) =>
+        person.avg_physical_attractiveness_rating >= attractivenessRange[0] &&
+        person.avg_physical_attractiveness_rating <= attractivenessRange[1],
+      display:
+        attractivenessRange[0] === attractivenessRange[1]
+          ? attractivenessRange[0] + " (out of 10) in physical attractiveness"
+          : `${attractivenessRange[0]} - ${attractivenessRange[1]} (out of 10) in physical attractiveness`,
+      min: 1,
+      max: 10,
+      info: "Rating of physical attractiveness by the opposite sex on a 1 - 10 scale, with 1 being least attractive, 5 being average, and 10 being most attractive. Based on average of 10 ratings of person's photo.",
     },
     {
       label: "Has Kids",
