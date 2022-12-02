@@ -26,6 +26,7 @@ const ResultsDisplay = ({
   buttonOrientation,
 }) => {
   const [aboutOpen, setAboutOpen] = useState(false);
+  const result = numerator / denominator;
   return (
     <Grid
       container
@@ -38,7 +39,7 @@ const ResultsDisplay = ({
     >
       <Grid item>
         <Typography variant="h1">
-          {formatFloatToPercent(numerator / denominator)}
+          {result < 0.005 ? "<0.5%" : formatFloatToPercent(result)}
         </Typography>
       </Grid>
       <Grid item>
