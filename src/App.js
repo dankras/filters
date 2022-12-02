@@ -25,12 +25,16 @@ export default function App() {
   const [isHeightFilterEnabled, setHeightFilterEnabled] = useState(true);
   const [heightRange, setHeightRange] = useState([62, 68]);
 
-  const [isIncomeFilterEnabled, setIncomeFilterEnabled] = useState(false);
-  const [incomeRange, setIncomeRange] = useState([3, 7]);
-
   const [isIntelligenceFilterEnabled, setIntelligenceFilterEnabled] =
     useState(false);
   const [intelligenceRange, setIntelligenceRange] = useState([0.3, 0.7]);
+
+  const [isAttractivenessFilterEnabled, setAttractivenessFilterEnabled] =
+    useState(false);
+  const [attractiveness, setAttractiveness] = useState("attractive");
+
+  const [isIncomeFilterEnabled, setIncomeFilterEnabled] = useState(false);
+  const [incomeRange, setIncomeRange] = useState([3, 7]);
 
   const [isSexPartnersFilterEnabled, setSexPartnersFilterEnabled] =
     useState(false);
@@ -50,10 +54,6 @@ export default function App() {
 
   const [isPoliticsFilterEnabled, setPoliticsFilterEnabled] = useState(false);
   const [politics, setPolitics] = useState("Moderate");
-
-  const [isAttractivenessFilterEnabled, setAttractivenessFilterEnabled] =
-    useState(false);
-  const [attractivenessRange, setAttractivenessRange] = useState([4, 6]);
 
   const [
     isPoliticalToleranceFilterEnabled,
@@ -93,26 +93,7 @@ export default function App() {
       formatRightBound: inchesToFeetAndInches,
       info: "How tall are they?",
     },
-    {
-      label: "Income",
-      type: "range",
-      isEnabled: isIncomeFilterEnabled,
-      setEnabled: setIncomeFilterEnabled,
-      range: incomeRange,
-      setRange: setIncomeRange,
-      predicate: (person) =>
-        person.income_bucket >= incomeRange[0] &&
-        person.income_bucket <= incomeRange[1],
-      display:
-        leftIncome === rightIncome
-          ? `earning ${leftIncome} per year`
-          : `earning ${leftIncome} - ${rightIncome} per year`,
-      min: 1,
-      max: 9,
-      formatLeftBound: (value) => formatIncomeBucket(value, true),
-      formatRightBound: (value) => formatIncomeBucket(value, false),
-      info: "Last year's income (self-reported)",
-    },
+
     {
       label: "Intelligence",
       type: "range",
@@ -135,6 +116,43 @@ export default function App() {
       formatLeftBound: (value) => formatFloatToPercent(value),
       formatRightBound: (value) => formatFloatToPercent(value),
       info: "IQ represented as a percentile",
+    },
+    {
+      label: "Attractiveness",
+      type: "dropdown",
+      isEnabled: isAttractivenessFilterEnabled,
+      setEnabled: setAttractivenessFilterEnabled,
+      value: attractiveness,
+      setValue: setAttractiveness,
+      predicate: (person) => person.attractiveness === attractiveness,
+      display:
+        attractiveness === "average" ? "average looking" : attractiveness,
+      options: [
+        { value: "attractive", label: "Attractive" },
+        { value: "average", label: "Average" },
+        { value: "unattractive", label: "Unattractive" },
+      ],
+      info: "Rating of physical attractiveness by the opposite sex. Based on average of 10 ratings of person's photo. Bucketed into three groups, attractive (6 - 10 out of 10), average (4 - 6 out of 10), and unnattractive (1 - 4 out of 10).",
+    },
+    {
+      label: "Income",
+      type: "range",
+      isEnabled: isIncomeFilterEnabled,
+      setEnabled: setIncomeFilterEnabled,
+      range: incomeRange,
+      setRange: setIncomeRange,
+      predicate: (person) =>
+        person.income_bucket >= incomeRange[0] &&
+        person.income_bucket <= incomeRange[1],
+      display:
+        leftIncome === rightIncome
+          ? `earning ${leftIncome} per year`
+          : `earning ${leftIncome} - ${rightIncome} per year`,
+      min: 1,
+      max: 9,
+      formatLeftBound: (value) => formatIncomeBucket(value, true),
+      formatRightBound: (value) => formatIncomeBucket(value, false),
+      info: "Last year's income (self-reported)",
     },
     {
       label: "Sexual Partners",
@@ -257,24 +275,7 @@ export default function App() {
       ],
       info: "Are they comfortable being friends with someone that disagrees with them on important political topics?",
     },
-    {
-      label: "Attractiveness",
-      type: "range",
-      isEnabled: isAttractivenessFilterEnabled,
-      setEnabled: setAttractivenessFilterEnabled,
-      range: attractivenessRange,
-      setRange: setAttractivenessRange,
-      predicate: (person) =>
-        person.avg_physical_attractiveness_rating >= attractivenessRange[0] &&
-        person.avg_physical_attractiveness_rating <= attractivenessRange[1],
-      display:
-        attractivenessRange[0] === attractivenessRange[1]
-          ? attractivenessRange[0] + " (out of 10) in physical attractiveness"
-          : `${attractivenessRange[0]} - ${attractivenessRange[1]} (out of 10) in physical attractiveness`,
-      min: 1,
-      max: 10,
-      info: "Rating of physical attractiveness by the opposite sex on a 1 - 10 scale, with 1 being least attractive, 5 being average, and 10 being most attractive. Based on average of 10 ratings of person's photo.",
-    },
+
     {
       label: "Has Kids",
       type: "dropdown",
