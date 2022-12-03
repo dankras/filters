@@ -158,8 +158,8 @@ const ResultsDisplay = ({
               </DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                  What percent of singles / single men / single women have the
-                  characteristics you care about?
+                  What percent of singles have the characteristics you care
+                  about?
                 </DialogContentText>
                 <DialogContentText mt={3}>
                   Data from{" "}
