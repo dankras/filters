@@ -23,7 +23,7 @@ import {
 
 export default function App() {
   const [isHeightFilterEnabled, setHeightFilterEnabled] = useState(true);
-  const [heightRange, setHeightRange] = useState([62, 68]);
+  const [heightRange, setHeightRange] = useState([66, 72]);
 
   const [isIntelligenceFilterEnabled, setIntelligenceFilterEnabled] =
     useState(false);
@@ -312,7 +312,7 @@ export default function App() {
   ];
 
   const [isSexDenominatorEnabled, setSexDenominatorEnabled] = useState(true);
-  const [sex, setSex] = useState("female");
+  const [sex, setSex] = useState("male");
 
   const denominatorsConfig = [
     {
@@ -374,6 +374,9 @@ export default function App() {
       margin={margin}
       width={width}
       buttonOrientation={isLargeScreen ? "row" : "column"}
+      showAttractivenessFAQ={
+        isAttractivenessFilterEnabled && attractiveness === "attractive"
+      }
     />
   );
 

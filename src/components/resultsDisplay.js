@@ -24,8 +24,10 @@ const ResultsDisplay = ({
   margin = 0,
   width,
   buttonOrientation,
+  showAttractivenessFAQ,
 }) => {
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [attractivenessFAQOpen, setAttractivenessFAQopen] = useState(false);
   const result = numerator / denominator;
   return (
     <Grid
@@ -78,6 +80,75 @@ const ResultsDisplay = ({
           </Typography>
         </Tooltip>
       </Grid>
+      {showAttractivenessFAQ && (
+        <Grid item mt={4}>
+          <Dialog
+            open={attractivenessFAQOpen}
+            onClose={() => setAttractivenessFAQopen(false)}
+          >
+            <DialogTitle>
+              <Box sx={{ fontWeight: "bold" }}>FAQ</Box>
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                <strong>Why are there so few attractive people?</strong>
+              </DialogContentText>
+              <DialogContentText mt={2}>
+                Women rate most men as below average in physical attractiveness.
+                The median man receives a 4.1 out of 10 rating. (This finding
+                has been replicated a number of times, e.g. see{" "}
+                <a
+                  href="https://i.imgur.com/L9Vu4Zo.png"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  OKCupid's data
+                </a>
+                .)
+              </DialogContentText>
+              <Box mt={2} display="flex" justifyContent="center">
+                <img
+                  src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F697f8957-ed79-48a3-b7b5-d35269cfa267_359x379.png"
+                  alt="Women Ratings"
+                />
+              </Box>
+              <DialogContentText mt={2}>
+                Men rate women along a fairly normal distribution, with the
+                median woman receiving a 5.0 out of 10 rating (i.e. men
+                perceived the median woman to be average looking).
+              </DialogContentText>
+              <DialogContentText mt={2}>
+                However, the number of women that are rated 8 out of 10 or
+                higher in this sample is fairly small, and may underrepresent
+                the number of attractive single women in the broader population.
+                (OKCupid's data suggests that the proportion of "most
+                attractive" women should be roughly equal to the proportion of
+                "least attractive" women.)
+              </DialogContentText>
+              <Box mt={2} display="flex" justifyContent="center">
+                <img
+                  src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fe7a24fb0-a301-4700-99c9-7160836dc42b_359x379.png"
+                  alt="Women Ratings"
+                />
+              </Box>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setAttractivenessFAQopen(false)}>
+                OK
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Typography
+            component="a"
+            href="#"
+            onClick={() => setAttractivenessFAQopen(true)}
+          >
+            <Box style={{ fontStyle: "italic", fontSize: 14 }}>
+              <strong>FAQ:</strong> Why are there so few attractive people?
+            </Box>
+          </Typography>
+        </Grid>
+      )}
       <Grid item mt={7}>
         <Grid container direction={buttonOrientation} spacing={2}>
           <Grid item>
