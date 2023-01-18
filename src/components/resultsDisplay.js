@@ -162,18 +162,6 @@ const ResultsDisplay = ({
                   about?
                 </DialogContentText>
                 <DialogContentText mt={3}>
-                  Data from{" "}
-                  <a
-                    href="https://www.mixmosa.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Mixmosa
-                  </a>
-                  , mostly representing singles in Austin, Dallas, San Antonio,
-                  and Houston in 2021 - 2022.
-                </DialogContentText>
-                <DialogContentText mt={3}>
                   <a
                     href="https://github.com/dankras/mixmosa-anonymized-data"
                     target="_blank"
@@ -181,7 +169,8 @@ const ResultsDisplay = ({
                   >
                     Data
                   </a>{" "}
-                  is open source.{" "}
+                  is open source (represents singles in major Texas metro areas
+                  2021 - 2022).{" "}
                   <a
                     href="https://github.com/dankras/filters"
                     target="_blank"
@@ -192,7 +181,7 @@ const ResultsDisplay = ({
                   is open source.
                 </DialogContentText>
                 <DialogContentText mt={3}>
-                  You may also be interested in:
+                  You may be interested in:
                   <Typography mt={1} ml={2}>
                     -{" "}
                     <a
@@ -200,7 +189,7 @@ const ResultsDisplay = ({
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      On The Future of Dating
+                      The Future of Dating
                     </a>
                   </Typography>
                   <Typography mt={2} ml={2}>
