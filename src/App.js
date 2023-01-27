@@ -360,7 +360,7 @@ export default function App() {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("sm"));
 
-  const [areFiltersOpen, setFiltersOpen] = useState(isLargeScreen);
+  const [areFiltersOpen, setFiltersOpen] = useState(true);
   const [areDenominatorsOpen, setDenominatorOpen] = useState(false);
 
   const CustomResults = ({ margin, width = 450 }) => (
